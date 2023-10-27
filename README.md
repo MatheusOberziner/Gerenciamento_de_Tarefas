@@ -1,6 +1,6 @@
 # Gerenciamento de Tarefas (gerenciamento-de-tarefas)
 
-Projeto que permite o gerenciamento de tarefas
+Sistema que permite o gerenciamento de tarefas
 
 ## Install the dependencies
 ```bash
