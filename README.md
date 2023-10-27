@@ -1,35 +1,19 @@
 # Gerenciamento de Tarefas (gerenciamento-de-tarefas)
+Autor: Matheus Schmidt Oberziner
 
-Sistema que permite o gerenciamento de tarefas
+Trabalho prático de programação funcional, criando um sistema de gerenciamento de tarefas. 
+O sistema deve ser capaz de adicionar, listar, marcar como concluídas e excluir tarefas.
 
-## Install the dependencies
+## Instalação de dependências
 ```bash
 yarn
 # or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Subir o servidor do app
 ```bash
 yarn quasar dev
 # or
 npm run dev
 ```
-
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
