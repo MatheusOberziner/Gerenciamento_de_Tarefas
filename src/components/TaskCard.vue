@@ -1,25 +1,53 @@
 <template>
   <q-card flat bordered>
     <q-item :v-if="task" clickable v-ripple>
-      <q-item-section avatar>
-        <q-avatar>
-          <q-icon :name="task.completed ? 'check' : 'alarm'"></q-icon>
-        </q-avatar>
-      </q-item-section>
       <q-item-section>
-        <q-item-label>
+        <q-item-label class="text-bold">
           {{ task.description }}
         </q-item-label>
-        <q-item-label caption lines="1">
-          {{ task.completed ? 'Concluída' : 'Pendente' }}
+        <q-item-label caption>
+          {{ task.project }}
         </q-item-label>
       </q-item-section>
-      <q-item-section side top>
-        <q-btn @click="toggleTask" color="primary" :icon="task.completed ? 'alarm' : 'check'">
-          {{ task.completed ? 'Reabrir' : 'Concluir' }}
+      <q-item-section side>
+        <q-btn class="q-mb-xs" color="primary" icon="menu">
+          <q-menu>
+            <q-list separator>
+              <q-item
+                v-for="statusItem in (index, status)"
+                :key="statusItem.index"
+                clickable
+                @click="changeStatus(statusItem.field)"
+              >
+                <q-item-section class="flex flex-center self-center q-py-xs">
+                  <q-icon :name="statusItem.icon" size="sm" :color="statusItem.color" />
+                  <p class="text-bold no-margin">{{ statusItem.label }}</p>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
         </q-btn>
-        <q-btn @click="deleteTask" color="negative" icon="delete"></q-btn>
+        <q-btn @click="confirmDelete" color="negative" icon="delete" />
       </q-item-section>
+
+      <q-dialog v-model="showConfirmDialog">
+        <q-card>
+          <q-card-section>
+            <q-card-title class="text-h6">Confirmação</q-card-title>
+          </q-card-section>
+
+          <q-card-section>
+            <q-card-main>
+              Tem certeza de que deseja excluir esta tarefa?
+            </q-card-main>
+          </q-card-section>
+
+          <q-card-actions align="center">
+            <q-btn v-close-popup label="Cancelar" color="primary" />
+            <q-btn label="Excluir" color="negative" @click="deleteTask" />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </q-item>
   </q-card>
 </template>
@@ -41,12 +69,27 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      status: [
+        { field: 'pending', label: 'Pendente', icon: 'alarm', color: 'negative' },
+        { field: 'inProgress', label: 'Em andamento', icon: 'timelapse', color: 'blue-7' },
+        { field: 'approval', label: 'Aguardando aprovação', icon: 'approval', color: 'orange-9' },
+        { field: 'completed', label: 'Concluídas', icon: 'done', color: 'positive' }
+      ],
+      showConfirmDialog: false
+    }
+  },
   methods: {
     deleteTask () {
       this.onDelete(this.task)
+      this.showConfirmDialog = false
     },
-    toggleTask () {
-      this.onToggle(this.task)
+    confirmDelete () {
+      this.showConfirmDialog = true
+    },
+    changeStatus (newStatus) {
+      this.onToggle(this.task, newStatus)
     }
   }
 }
