@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row q-col-gutter-lg q-pa-xl" style="background-color: #e7ecf1;">
+  <q-page class="row q-col-gutter-lg q-pa-xl" style="background-color: #e7ecf1; height: 100%;">
     <q-page-section class="col-3">
       <div class="row items-center q-gutter-xs q-pb-md q-pl-sm">
         <q-icon name="alarm" color="negative" size="sm" />
@@ -84,6 +84,7 @@
             <q-input
               v-model="newTask.project"
               label="Projeto*"
+              outlined
               lazy-rules
               :rules="[ (val) => (val && val.length > 0) || 'Projeto deve ser informada']"
             />
@@ -113,7 +114,11 @@ export default {
         { id: 4, description: 'Tarefa 4', status: 'approval', project: 'Projeto 2' },
         { id: 5, description: 'Tarefa 5', status: 'pending', project: 'Projeto 3' },
         { id: 6, description: 'Tarefa 6', status: 'inProgress', project: 'Projeto 2' },
-        { id: 7, description: 'Tarefa 7', status: 'approval', project: 'Projeto 1' }
+        { id: 7, description: 'Tarefa 7', status: 'approval', project: 'Projeto 1' },
+        { id: 8, description: 'Tarefa 8', status: 'inProgress', project: 'Projeto 1' },
+        { id: 9, description: 'Tarefa 9', status: 'approval', project: 'Projeto 3' },
+        { id: 10, description: 'Tarefa 10', status: 'completed', project: 'Projeto 3' },
+        { id: 11, description: 'Tarefa 11', status: 'inProgress', project: 'Projeto 3' }
       ],
       showAddTaskDialog: false,
       newTask: {
@@ -123,14 +128,17 @@ export default {
     }
   },
   computed: {
+    // filtra as tarefas por status
     getTasksByStatus () {
       return status => this.tasks.filter(task => task.status === status)
     }
   },
   methods: {
+    // Abre o modal de adicionar tarefa
     openAddTaskDialog () {
       this.showAddTaskDialog = true
     },
+    // Função para adicionar tarefa
     addTask () {
       const newTask = {
         id: this.tasks.length + 1,
@@ -148,13 +156,16 @@ export default {
           }
         })
     },
+    // função para remover tarefa
     deleteTask (task) {
       const taskIndex = this.tasks.indexOf(task)
       if (taskIndex !== -1) {
         this.tasks.splice(taskIndex, 1)
       }
     },
-    toggleTask (task, newStatus) {
+    // função para alterar status da tarefa
+    // (Expressão lambda)
+    toggleTask: (task, newStatus) => {
       task.status = newStatus
     }
   }

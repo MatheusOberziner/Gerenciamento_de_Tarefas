@@ -1,19 +1,4 @@
-# Gerenciamento de Tarefas (gerenciamento-de-tarefas)
-Autor: Matheus Schmidt Oberziner
+#gerenciamento_de_tarefas
+Alunos: Matheus Schmidt Oberziner e Diego Muniz
 
-Trabalho prático de programação funcional, criando um sistema de gerenciamento de tarefas. 
-O sistema deve ser capaz de adicionar, listar, marcar como concluídas e excluir tarefas.
-
-## Instalação de dependências
-```bash
-yarn
-# or
-npm install
-```
-
-## Subir o servidor do app
-```bash
-yarn quasar dev
-# or
-npm run dev
-```
+Para executar o sistema em sua máquina: primeiramente deve-se clonar o repositório, logo após deve-se abrir a pasta no terminal e rodar `npm install` ou `yarn` para instalação de dependências e pacotes. E enfim, para executar o projeto, rodar o comando `npm run dev` ou `yarn quasar dev`.
