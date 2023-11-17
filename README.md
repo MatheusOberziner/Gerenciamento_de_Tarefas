@@ -1,4 +1,4 @@
-#gerenciamento_de_tarefas 
+# Gerenciamento_de_Tarefas 
 
 Alunos: Matheus Schmidt Oberziner e Diego Muniz
 
